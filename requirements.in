@@ -1,0 +1,9 @@
+numpy
+scipy
+sympy
+mpmath
+networkx
+pandas
+scikit-learn
+statsmodels
+python-sat

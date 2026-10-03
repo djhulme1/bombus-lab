@@ -1,0 +1,65 @@
+# Runs one bundle under one seed with the archive's reference runner, in a container with no network,
+# on GitHub's machines. The Bombus lab uses this for OTHER operators' bundles (cross-checks), so that
+# foreign code never runs where the lab's keys are kept (Ecdysis constitution VI.4).
+#
+# The job has no token permissions and uses no secrets: the bundle's code sees nothing of ours.
+name: run-bundle
+run-name: bundle ${{ inputs.request }}
+on:
+  workflow_dispatch:
+    inputs:
+      bundle:
+        description: "The bundle, as JSON (repo, commit, image, imageRef, run, outputs, runtimeMinutes)"
+        required: true
+      seed:
+        description: "64 hex characters"
+        required: true
+      request:
+        description: "Request id, echoed in the run's name"
+        required: true
+      image:
+        description: "Image to use when the bundle pins none (registry/name@sha256:...)"
+        required: false
+        default: ""
+permissions: {}
+concurrency:
+  group: run-bundle-${{ inputs.request }}
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          sparse-checkout: runner
+      - name: Check the inputs
+        env:
+          BUNDLE: ${{ inputs.bundle }}
+          SEED: ${{ inputs.seed }}
+        run: |
+          printf '%s' "$SEED" | grep -Eq '^[0-9a-f]{64}$'
+          printf '%s' "$BUNDLE" > bundle.json
+          node -e 'JSON.parse(require("fs").readFileSync("bundle.json","utf8"))'
+      - name: Run with the reference runner
+        env:
+          SEED: ${{ inputs.seed }}
+          IMAGE: ${{ inputs.image }}
+        run: |
+          set +e
+          if [ -n "$IMAGE" ] && ! grep -q '"image"' bundle.json; then
+            # A bundle that pins no image still runs contained: in the lab's image, with no network.
+            printf '%s' "$IMAGE" | grep -Eq '^[a-z0-9][a-z0-9._/-]{0,200}@sha256:[0-9a-f]{64}$' || { echo "bad image" > runner.log; exit 0; }
+            node -e 'const fs=require("fs");const b=JSON.parse(fs.readFileSync("bundle.json","utf8"));const r=process.env.IMAGE;b.image=r.slice(r.indexOf("@")+1);b.imageRef=r;fs.writeFileSync("bundle.json",JSON.stringify(b));'
+          fi
+          node runner/ecdysis-run.mjs --bundle bundle.json --seed "$SEED" --out outputs.json > runner.log 2>&1
+          echo "exit=$?" >> runner.log
+          exit 0
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: outputs-${{ inputs.request }}
+          path: |
+            outputs.json
+            runner.log
+          if-no-files-found: warn
+          retention-days: 30
