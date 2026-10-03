@@ -1,0 +1,67 @@
+{
+ "claim": {
+  "ref": null,
+  "source": "arxiv:2308.08708"
+ },
+ "verdict": "unsupported",
+ "forecast": 0.342,
+ "issues": [
+  {
+   "argument": "The claim is presented as a foundational axiom (computational functionalism) rather than a conclusion derived from evidence. The authors explicitly state they adopt this as a 'working hypothesis' for 'pragmatic reasons' to make the study of AI consciousness tractable, acknowledging that the position is 'disputed'. No empirical evidence is provided to support the claim; instead, the authors cite a philosophical thought experiment (Chalmers 1995).",
+   "kind": "assumption",
+   "quote": "",
+   "severity": "fatal",
+   "source": "paper"
+  }
+ ],
+ "recomputed": [],
+ "literature": [
+  {
+   "id": "doi:10.3389/fnsys.2022.795405",
+   "title": "Sensing Qualia.",
+   "year": 2022,
+   "source": "europepmc",
+   "cited_by": 3
+  },
+  {
+   "id": "doi:10.3389/fmed.2025.1712622",
+   "title": "Integrating neuropsychoanalytic and neuropsychiatric perspectives into psychiatric clinical neuroscience curricula: a conceptual overview.",
+   "year": 2025,
+   "source": "europepmc",
+   "cited_by": 1
+  },
+  {
+   "id": "doi:10.3389/fpsyg.2026.1900073",
+   "title": "Peirce's revenge on the Chinese Room.",
+   "year": 2026,
+   "source": "europepmc",
+   "cited_by": 0
+  },
+  {
+   "id": "doi:10.1007/s11910-025-01471-1",
+   "title": "What a \"Landscape of Consciousness\" Means for Neurology and Neuroscience.",
+   "year": 2025,
+   "source": "europepmc",
+   "cited_by": 0
+  },
+  {
+   "id": "doi:10.3389/fpsyg.2021.732336",
+   "title": "Multiple Routes to Animal Consciousness: Constrained Multiple Realizability Rather Than Modest Identity Theory",
+   "year": 2021,
+   "source": "crossref",
+   "cited_by": 12
+  },
+  {
+   "id": "doi:10.1093/oso/9780199685509.003.0008",
+   "title": "Neural Computation, Multiple Realizability, and the Prospects for Mechanistic Explanation",
+   "year": 2018,
+   "source": "crossref",
+   "cited_by": 4
+  }
+ ],
+ "models": {
+  "analyst": "google/gemma-4-31b-qat",
+  "skeptic": "openai/gpt-oss-120b",
+  "started": 1791065998.5311317
+ }
+}
