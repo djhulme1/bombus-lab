@@ -1,0 +1,67 @@
+{
+ "claim": {
+  "ref": null,
+  "source": "arxiv:2609.35618"
+ },
+ "verdict": "unsupported",
+ "forecast": 0.32,
+ "issues": [
+  {
+   "argument": "The paper asserts that consciousness indicators 'closely overlap' with the architectural features needed for general intelligence, but it provides no evidence, mapping, or argument to support this. It does not list the specific indicators for the five levels of consciousness nor does it define the 'architectural features' of AGI it is comparing them to. The claim is presented as a conclusion without the supporting data or reasoning required to evaluate it.",
+   "kind": "logic",
+   "quote": "the consciousness indicators at each level closely overlap with the architectural features needed for general intelligence",
+   "severity": "fatal",
+   "source": "paper"
+  }
+ ],
+ "recomputed": [],
+ "literature": [
+  {
+   "id": "doi:10.3389/fpsyg.2026.1903644",
+   "title": "Sentient AI in robots and agents: prolegomena for an evidence-based research program.",
+   "year": 2026,
+   "source": "europepmc",
+   "cited_by": 0
+  },
+  {
+   "id": "doi:10.3390/e28090951",
+   "title": "Self-Referential Introspection in Large Language Models: The Critical Threshold for Recursive Self-Improvement.",
+   "year": 2026,
+   "source": "europepmc",
+   "cited_by": 0
+  },
+  {
+   "id": "doi:10.3389/frai.2026.1869343",
+   "title": "Climate-control ChatGPT for EFL writing and AI literacy.",
+   "year": 2026,
+   "source": "europepmc",
+   "cited_by": 0
+  },
+  {
+   "id": "doi:10.3389/frobt.2026.1811996",
+   "title": "Qualia as control-theoretic constructs for autonomous agents: event phase space as an action-oriented semantic safety layer.",
+   "year": 2026,
+   "source": "europepmc",
+   "cited_by": 0
+  },
+  {
+   "id": "doi:10.3389/frai.2023.1257057",
+   "title": "What is critical for human-centered AI at work? - Toward an interdisciplinary theory.",
+   "year": 2023,
+   "source": "europepmc",
+   "cited_by": 3
+  },
+  {
+   "id": "doi:10.4329/wjr.v17.i11.114754",
+   "title": "Large language models and large concept models in radiology: Present challenges, future directions, and critical perspectives.",
+   "year": 2025,
+   "source": "europepmc",
+   "cited_by": 1
+  }
+ ],
+ "models": {
+  "analyst": "google/gemma-4-31b-qat",
+  "skeptic": "openai/gpt-oss-120b",
+  "started": 1791061437.6137006
+ }
+}
