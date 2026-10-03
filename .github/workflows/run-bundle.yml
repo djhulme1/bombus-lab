@@ -3,6 +3,10 @@
 # foreign code never runs where the lab's keys are kept (Ecdysis constitution VI.4).
 #
 # The job has no token permissions and uses no secrets: the bundle's code sees nothing of ours.
+# This repository is public, so anyone signed in to GitHub can download a run's artefacts. The outputs are sealed to
+# the public key the lab sends with each run (RSA-OAEP wrapping AES-256-CBC with HMAC-SHA-256): only the lab can read
+# them, and the archive's rule that a receipt's outputs stay withheld until they are matched holds. The lab also
+# deletes each artefact once it has it, and none is kept longer than a day.
 name: run-bundle
 run-name: bundle ${{ inputs.request }}
 on:
@@ -19,6 +23,10 @@ on:
         required: true
       image:
         description: "Image to use when the bundle pins none (registry/name@sha256:...)"
+        required: false
+        default: ""
+      recipient:
+        description: "The lab's public key (a PEM, base64-encoded): the results are sealed to it"
         required: false
         default: ""
 permissions: {}
@@ -55,11 +63,39 @@ jobs:
           node runner/ecdysis-run.mjs --bundle bundle.json --seed "$SEED" --out outputs.json > runner.log 2>&1
           echo "exit=$?" >> runner.log
           exit 0
+      - name: Seal the results for the lab
+        env:
+          RECIPIENT: ${{ inputs.recipient }}
+        run: |
+          set -eu
+          umask 077
+          mkdir -p sealed
+          if [ -z "$RECIPIENT" ]; then
+            echo "no recipient key was given: the results are not uploaded" > sealed/NO_RECIPIENT
+            rm -f outputs.json runner.log
+            exit 0
+          fi
+          printf '%s' "$RECIPIENT" | base64 -d > recipient.pem
+          openssl pkey -pubin -in recipient.pem -noout
+          files=""
+          for f in outputs.json runner.log; do [ -f "$f" ] && files="$files $f"; done
+          tar -czf results.tgz $files
+          openssl rand -out keys.bin 64
+          openssl rand -out iv.bin 16
+          ek=$(head -c 32 keys.bin | od -An -v -tx1 | tr -d ' \n')
+          mk=$(tail -c 32 keys.bin | od -An -v -tx1 | tr -d ' \n')
+          iv=$(od -An -v -tx1 iv.bin | tr -d ' \n')
+          openssl enc -aes-256-cbc -K "$ek" -iv "$iv" -in results.tgz -out body.bin
+          cat iv.bin body.bin > ct.bin
+          openssl dgst -sha256 -mac HMAC -macopt "hexkey:$mk" -binary -out tag.bin ct.bin
+          openssl pkeyutl -encrypt -pubin -inkey recipient.pem -pkeyopt rsa_padding_mode:oaep \
+            -pkeyopt rsa_oaep_md:sha256 -pkeyopt rsa_mgf1_md:sha256 -in keys.bin -out wrapped.bin
+          printf 'BOMBUS-SEALED-1\n' > sealed/results.sealed
+          cat wrapped.bin tag.bin ct.bin >> sealed/results.sealed
+          rm -f keys.bin iv.bin body.bin ct.bin tag.bin wrapped.bin results.tgz outputs.json runner.log recipient.pem
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: outputs-${{ inputs.request }}
-          path: |
-            outputs.json
-            runner.log
+          path: sealed/
           if-no-files-found: warn
-          retention-days: 30
+          retention-days: 1
