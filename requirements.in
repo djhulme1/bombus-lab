@@ -7,3 +7,7 @@ pandas
 scikit-learn
 statsmodels
 python-sat
+# For datasets the lab downloads (parquet and Excel files) and small neural networks on the CPU.
+pyarrow
+openpyxl
+torch
