@@ -1,0 +1,74 @@
+{
+ "claim": {
+  "ref": "ext:db469a5df3d2c475#C1",
+  "source": null
+ },
+ "verdict": "flawed",
+ "forecast": 0.32,
+ "issues": [
+  {
+   "argument": "The authors define AGI as systems demonstrating 'broad capabilities of intelligence, including reasoning, planning, and the ability to learn from experience' at or above human-level. However, the evidence provided consists of specific task outputs—such as a rhyming poem about primes or TikZ code—which demonstrate proficiency in synthesis and generation but do not rigorously prove the presence of general reasoning, autonomous planning, or learning from experience as distinct from in-context pattern matching.",
+   "kind": "logic",
+   "quote": "We use AGI to refer to systems that demonstrate broad capabilities of intelligence, including reasoning, planning, and the ability to learn from experience, and with these capabilities at or above human-level.",
+   "severity": "major",
+   "source": "paper"
+  },
+  {
+   "argument": "The claim of 'breadth and depth' is supported primarily by qualitative, anecdotal examples rather than systematic measurement. The authors explicitly decline to use the Chollet benchmark for general intelligence and state that their quantitative results are provided 'for illustration purpose only' and would differ in the final version, meaning the evidence for the AGI claim is not based on reproducible, calibrated metrics.",
+   "kind": "measurement",
+   "quote": "",
+   "severity": "major",
+   "source": "paper"
+  }
+ ],
+ "recomputed": [],
+ "literature": [
+  {
+   "id": "doi:10.60087/jaigs.v5i1.196",
+   "title": "Critique of Modern Feminism",
+   "year": 2024,
+   "source": "crossref",
+   "cited_by": 0
+  },
+  {
+   "id": "doi:10.3233/978-1-58603-929-5-735",
+   "title": "Theory of Quantified Boolean Formulas",
+   "year": 2009,
+   "source": "crossref",
+   "cited_by": 0
+  },
+  {
+   "id": "doi:10.1038/s41591-026-04431-5",
+   "title": "General-purpose large language models outperform specialized clinical AI tools on medical benchmarks.",
+   "year": 2026,
+   "source": "europepmc",
+   "cited_by": 16
+  },
+  {
+   "id": "doi:10.1136/bmjdh-2026-000113",
+   "title": "State of clinical AI in 2026.",
+   "year": 2026,
+   "source": "europepmc",
+   "cited_by": 0
+  },
+  {
+   "id": "doi:10.1016/j.eclinm.2026.104184",
+   "title": "The benchmark illusion: on the curious underestimation of AI and the uncertainty of its creators' gold standards.",
+   "year": 2026,
+   "source": "europepmc",
+   "cited_by": 0
+  },
+  {
+   "id": "doi:10.2196/92843",
+   "title": "Reflection- and Curriculum-Based Instruction Tuning for Diabetes-Specialized Large Language Models: Model Development and Evaluation Study.",
+   "year": 2026,
+   "source": "europepmc",
+   "cited_by": 0
+  }
+ ],
+ "models": {
+  "analyst": "google/gemma-4-31b-qat",
+  "skeptic": "openai/gpt-oss-120b",
+  "started": 1791127548.7810588
+ }
+}
