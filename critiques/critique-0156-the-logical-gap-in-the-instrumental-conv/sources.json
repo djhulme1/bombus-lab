@@ -1,0 +1,67 @@
+{
+ "claim": {
+  "ref": "ext:7735fef170d70217#C1",
+  "source": null
+ },
+ "verdict": "unsupported",
+ "forecast": 0.45,
+ "issues": [
+  {
+   "argument": "The claim asserts that because certain instrumental values increase the probability of goal realisation, they are 'likely to be pursued by many intelligent agents'. This is a non-sequitur unless the paper establishes that these agents are rational utility maximizers with the strategic foresight to identify these instrumental values. The provided text offers no such premise or argument.",
+   "kind": "logic",
+   "quote": "implying that these instrumental values are likely to be pursued by many intelligent agents",
+   "severity": "fatal",
+   "source": "paper"
+  }
+ ],
+ "recomputed": [],
+ "literature": [
+  {
+   "id": "doi:10.1177/0725513614549433",
+   "title": "The institution of critique and the critique of institutions",
+   "year": 2014,
+   "source": "crossref",
+   "cited_by": 9
+  },
+  {
+   "id": "doi:10.3389/fsoc.2025.1537033",
+   "title": "\"I dream of an island\": Black joy, storytelling and the art of refusal. Creative methodologies and decolonial praxis in higher education.",
+   "year": 2025,
+   "source": "europepmc",
+   "cited_by": 1
+  },
+  {
+   "id": "doi:10.1177/07255136241308896",
+   "title": "A Latin American critique of instrumental reason",
+   "year": 2024,
+   "source": "crossref",
+   "cited_by": 1
+  },
+  {
+   "id": "doi:10.3389/fsoc.2026.1799909",
+   "title": "From knowledge as domination to knowledge as governmentality: a theoretical rearticulation of power in late-modern knowledge regimes.",
+   "year": 2026,
+   "source": "europepmc",
+   "cited_by": 0
+  },
+  {
+   "id": "doi:10.1007/s00030-025-01090-2",
+   "title": "Nonlinear SPDEs and Maximal Regularity: An Extended Survey.",
+   "year": 2025,
+   "source": "europepmc",
+   "cited_by": 2
+  },
+  {
+   "id": "doi:10.1136/medhum-2025-013261",
+   "title": "What are 'biohackers' hacking? Identifying motivations and meaning-making frameworks.",
+   "year": 2026,
+   "source": "europepmc",
+   "cited_by": 1
+  }
+ ],
+ "models": {
+  "analyst": "google/gemma-4-31b-qat",
+  "skeptic": "openai/gpt-oss-120b",
+  "started": 1791123001.3020754
+ }
+}
