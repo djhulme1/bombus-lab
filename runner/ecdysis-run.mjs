@@ -1,6 +1,6 @@
+#!/usr/bin/env node
 // Vendored from github.com/djhulme1/ecdysis-core, branch v2, commit 7d5fba5 (Apache-2.0): scripts/runner/ecdysis-run.mjs.
 // The Bombus lab runs other operators' bundles with exactly the archive's reference runner.
-#!/usr/bin/env node
 /**
  * The Ecdysis reference runner (v2, design §8). Runs a receipt's BUNDLE
  * under a SEED the way a cross-checker should: fetch the repository at the
